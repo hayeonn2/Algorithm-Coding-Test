@@ -4,25 +4,6 @@ function solution(s) {
     return s.length % 2 === 0 ? s[midStrIdx-1]+s[midStrIdx] : s[midStrIdx-1];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // var answer = '';
 //     if(s.length % 2 === 0){
 //         answer = s[s.length / 2 - 1] + s[s.length / 2]
