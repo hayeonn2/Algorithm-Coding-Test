@@ -1,60 +1,39 @@
 function solution(n) {
-  const TOTAL = n * n;
-  const arr = Array.from({ length: n }, () => []);
-  let value = 1;
-  let tempCount = 0;
-  let [x, y] = [0, 0];
-
-  const adjustCoordinate = (direction) => {
-    const funcByDirection = {
-      right: () => {
-        x--;
-        y++;
-        n--;
-      },
-      left: () => {
-        x++;
-        y--;
-        n--;
-      },
-      bottom: () => {
-        x--;
-        y--;
-      },
-      top: () => {
-        x++;
-        y++;
-      },
-    };
-    tempCount = 0;
-    funcByDirection[direction]();
-  };
-
-  while (value <= TOTAL) {
-    // x축 우측
-    while (tempCount++ < n) {
-      arr[y][x++] = value++;
+    const answer = [];
+    // 0 배열 생성
+    for (let i=0; i<n; i++) {
+        answer.push(new Array(n).fill(0));
     }
-    adjustCoordinate("right");
 
-    // y축 아래
-    while (tempCount++ < n) {
-      arr[y++][x] = value++;
+    let num = 2;
+    let x = 0;
+    let y = 0;
+    answer[y][x] = 1;
+
+    while (num <= n**2) {
+        while (x < n-1 && answer[y][x+1] === 0) {
+            x++;
+            answer[y][x] = num;
+            num++;
+        }
+
+        while (y < n-1 && answer[y+1][x] === 0) {
+            y++;
+            answer[y][x] = num;
+            num++;
+        }
+
+        while (x > 0 && answer[y][x-1] === 0) {
+            x--;
+            answer[y][x] = num;
+            num++;
+        }
+
+        while (y > 0 && answer[y-1][x] === 0) {
+            y--;
+            answer[y][x] = num;
+            num++;
+        }
     }
-    adjustCoordinate("bottom");
-
-    // x축 좌측
-    while (tempCount++ < n) {
-      arr[y][x--] = value++;
-    }
-    adjustCoordinate("left");
-
-    // y축 위
-    while (tempCount++ < n) {
-      arr[y--][x] = value++;
-    }
-    adjustCoordinate("top");
-  }
-
-  return arr;
+    return answer;
 }
