@@ -1,11 +1,9 @@
 function solution(s) {
-    const arr = s.slice(2, s.length-2).split("},{");
-     const arr2 = arr.sort((a, b) => a.length - b.length)
-    const arr3 = arr2.join(",").split(",").map(Number);
-   
-
-
-    return [...new Set(arr3)]
+    const sliceArray = s.slice(2, s.length-2).split("},{");
+    const sortArray = sliceArray.sort((a, b) => a.length - b.length)
+    const setArray = sortArray.join(",").split(",").map(Number);
+  
+    return [...new Set(setArray)];
     
 }
 
