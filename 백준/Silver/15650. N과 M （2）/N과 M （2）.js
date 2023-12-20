@@ -3,12 +3,13 @@ let input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
 const [n, m] = input[0].split(" ").map(Number);
 const seq = [...Array(m).fill(0)];
 const visited = [...Array(n).fill(false)];
+
 let result = "";
 
 function dfs(k, idx) {
-  const arr = [];
-
   if (k === m) {
+    const arr = [];
+
     for (let i = 0; i < m; i++) {
       arr.push(seq[i]);
     }
