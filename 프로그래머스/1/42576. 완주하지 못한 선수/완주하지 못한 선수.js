@@ -1,50 +1,29 @@
 function solution(participant, completion) {
-    const participantObj = {};
-    const completionObj = {};
-    let answer = "";
+    let hash = new Map();
     
-    for(const person of participant){
-        if(!participantObj[person]){
-            participantObj[person] = 1;
+    for(let i = 0; i < completion.length; i++){
+        if(!hash.has(completion[i])){
+            hash.set(completion[i], 1);     
         } else {
-            participantObj[person]++;
-        }
+            hash.set(completion[i], hash.get(completion[i])+1)
+        }  
     }
     
-    for(const person of completion){
-        if(!completionObj[person]){
-            completionObj[person] = 1;
+    for(let i = 0; i < participant.length; i++){
+        if(!hash.has(participant[i])){
+            return participant[i];
         } else {
-            completionObj[person]++;
+            const count = hash.get(participant[i]);
+            
+            if(count === 0){
+                return participant[i]
+            } else {
+                
+                hash.set(participant[i], count-1)
+
+            }
         }
     }
+                   
     
-    const participantKeys = Object.keys(participantObj)
-    
-    for(const keys of participantKeys){
-        if(!completionObj[keys]){
-            answer = keys;
-        }
-        if(participantObj[keys] !== completionObj[keys]){
-            answer = keys;
-        }
-        
-    }
-    
-    
-    
-    return answer ;
 }
-
-
-
-
-
-
-
-//     participant.sort();
-//     completion.sort();
-    
-//     for(let i = 0; i < participant.length; i++){
-//         if(participant[i] !== completion[i]) return participant[i];
-//     }
